@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='mercy_reader',
-    version='0.0.1-1',
+    version='0.0.1',
     author='Daniel Han',
     author_email='hex0cter@gmail.com',
     maintainer='Daniel Han',
