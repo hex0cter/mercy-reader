@@ -1,0 +1,16 @@
+{
+  "title": "How to list all tables and describe tables in oracle - Tech notes",
+  "author": null,
+  "date_published": null,
+  "dek": null,
+  "lead_image_url": null,
+  "content": "<div class=\"page\"> <div id=\"menu-bar\" class=\"menu-bar sticky bordered\"> </div> <p id=\"content\" class=\"content\"> <main> <p>Connect to the database:</p>\n<p><code>sqlplus username/<a href=\"/cdn-cgi/l/email-protection\" class=\"__cf_email__\">[email&#xA0;protected]</a></code></p>\n<p>To list all tables owned by the current user, type:</p>\n<p><code>select tablespace_name, table_name from user_tables;</code></p>\n<p>To list all tables in a database:</p>\n<p><code>select tablespace_name, table_name from dba_tables;</code></p>\n<p>To list all tables accessible to the current user, type:</p>\n<p><code>select tablespace_name, table_name from all_tables;</code></p> </main> <nav class=\"nav-wrapper\"> <a href=\"../database/finding-which-table-contains-a-column-in-the-oracle.html\" class=\"mobile-nav-chapters previous\"> <i class=\"fa fa-angle-left\"></i> </a> <a href=\"../database/how-to-check-oracle-version.html\" class=\"mobile-nav-chapters next\"> <i class=\"fa fa-angle-right\"></i> </a> </nav> </p> </div>",
+  "next_page_url": null,
+  "url": "https://carnet.danielhan.dev/database/how-to-list-all-tables-and-describe-tables-in-oracle.html",
+  "domain": "carnet.danielhan.dev",
+  "excerpt": "Connect to the database: sqlplus username/[email protected] To list all tables owned by the current user, type: select tablespace_name, table_name from user_tables; To list all tables in a database:&hellip;",
+  "word_count": 49,
+  "direction": "ltr",
+  "total_pages": 1,
+  "rendered_pages": 1
+}

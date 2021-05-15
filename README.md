@@ -257,3 +257,8 @@ url=$1
 reader=path/to/reader.py
 mercury-parser "$url" | "$reader" - -w 80 -f txt | "$PAGER"
 ```
+
+### Run the test
+```bash
+python setup.py pytest --addopts -s
+```
