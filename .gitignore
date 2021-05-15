@@ -15,7 +15,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-mercy_reader/
 lib64/
 parts/
 sdist/
