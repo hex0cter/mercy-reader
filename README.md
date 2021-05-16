@@ -42,7 +42,7 @@ print(reader.Format.formatter['md'](obj))
 
 ### Mercury Web Parser JSON
 
-The Mercury Web Parser's raw JSON results are useful on their own:
+The library takes Mercury Web Parser's JSON results as its input. Below is an example:
 ```json
 {
   "title": "Mercury Goes Open Source! — Postlight — Digital product studio",
@@ -176,3 +176,7 @@ Adam Pash is a Director of Engineering at Postlight. Want help making sense of b
 ```bash
 python setup.py pytest --addopts -s
 ```
+
+## References
+* [mercury-parser](https://github.com/postlight/mercury-parser)
+* [zyocum's reader](https://github.com/zyocum/reader)
