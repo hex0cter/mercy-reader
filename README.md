@@ -12,7 +12,7 @@ npm -g install @postlight/mercury-parser
 
 ## Install
 
-Clone this repository, create a virtual environment, and install the Python requirements:
+Install it as a Python dependency:
 
 ```
 pip install mercy-reader
@@ -33,7 +33,7 @@ print(reader.Format.formatter['md'](obj))
 
 ```
 
-Supported format:
+### Supported formats:
 * md
 * json
 * txt
@@ -43,33 +43,7 @@ Supported format:
 ### Mercury Web Parser JSON
 
 The Mercury Web Parser's raw JSON results are useful on their own:
-
-```
-(reader) $ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source | jq .
-{
-  "title": "Mercury Goes Open Source! — Postlight — Digital product studio",
-  "author": "Adam Pash",
-  "date_published": "2019-02-06T14:36:45.000Z",
-  "dek": null,
-  "lead_image_url": "https://postlight.com/wp-content/uploads/2019/02/mercury-open-source-social-card-e1550670446269.png",
-  "content": "<div class=\"body__content\"> <p>It&#x2019;s my pleasure to announce that today, Postlight is open-sourcing the <a href=\"https://mercury.postlight.com/web-parser/\">Mercury Web Parser</a>.</p>\n<p>Written in JavaScript and running on both Node and in the browser, Mercury Parser is the engine that powers the Mercury Parser API, <a href=\"https://mercury.postlight.com/amp-converter/\">Mercury AMP Converter</a>, <a href=\"https://mercury.postlight.com/reader/\">Mercury Reader</a>, and <a href=\"https://postlight.com/trackchanges/the-secret-engines-of-the-internet\">even more third-party software and services.</a></p>\n<p>Mercury Parser allows for better reading experiences, easier content migration, and endless opportunities for remixing the web, by making semantic sense out of any article. Mercury Parser sees web pages the same way you do: It sees titles, content, authors, and lead images, and makes all of that extracted data easily available to your software, which, unfortunately, sees only a sea of HTML markup, where page navigation, advertising, and the like are indistinguishable from content.</p>\n<p>Get <a href=\"https://github.com/postlight/mercury-parser\">Mercury Parser</a> for use in your projects on GitHub:</p>\n<blockquote class=\"embedly-card\"> <p>&#x1F4DC; Extracting content from the chaos of the web. Contribute to postlight/mercury-parser development by creating an account on GitHub.</p>\n</blockquote> <h3>Try Mercury Parser</h3>\n<p>Wanna see Mercury Parser in action in your own command line? First install it:</p>\n<pre>$ yarn global add @postlight/mercury-parser</pre>\n<p>Then parse an article and check out the results:</p>\n<pre>$ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source</pre>\n<p>Now, as an open-source project &#x2014; and with your help &#x2014; we hope to make the Mercury Parser even better. Say, for example, Mercury&#x2019;s done a less-than-perfect job parsing an article from your favorite web site. You can <a href=\"https://github.com/postlight/mercury-parser/blob/master/src/extractors/custom/README.md\">write and submit a custom site parser</a> guaranteed to get it right quickly, every time. We&#x2019;re excited about <a href=\"https://github.com/postlight/mercury-parser/blob/master/CONTRIBUTING.md\">all sorts of ways</a> the Mercury community will contribute to this project.</p>\n<h3>What about the API?</h3>\n<p>Over time, we will deprecate the Mercury Parser API. We&#x2019;ll do it slowly, with lots of warning and advance email notifications, and <a href=\"https://github.com/postlight/mercury-parser-api\">drop-in replacement code</a>. We&#x2019;ve committed to creating an easy path for people who want to use Mercury in any way they see fit, using open source, well-documented code that can be easily rolled into any other service or API. We want to put our energy there, making a more tractable web together&#x2014;not behind a private, hosted API.</p>\n<p>Indeed, one of the main drivers for this choice was API users asking us to open source Mercury&#x2014;and asking how they could help improve it.</p>\n<p>Today we&#x2019;ve done exactly that. You can use Mercury Parser directly in any JavaScript project, whether on Node or in your browser, starting today, with no API required. If you&#x2019;d like to chat about the Mercury Parser or need some help getting started, join the community in the <a href=\"https://gitter.im/postlight/mercury\">Mercury Gitter channel</a>.</p>\n<p><em><a href=\"https://postlight.com/trackchanges/authors/adam-pash\">Adam Pash</a> is a Director of Engineering at Postlight. Want help making sense of big messy data? Get in touch: <a href=\"https://postlight.com/cdn-cgi/l/email-protection#6d05080101022d1d021e1901040a0519430e0200\"><span class=\"__cf_email__\">[email&#xA0;protected]</span></a>.</em></p> </div>",
-  "next_page_url": null,
-  "url": "https://postlight.com/trackchanges/mercury-goes-open-source",
-  "domain": "postlight.com",
-  "excerpt": "It’s my pleasure to announce that today, Postlight is open-sourcing the Mercury Web Parser. Written in JavaScript and running on both Node and in the ...",
-  "word_count": 436,
-  "direction": "ltr",
-  "total_pages": 1,
-  "rendered_pages": 1
-}
-```
-
-### Full JSON
-
-`reader.py` augments the Mercury Web Parser's results with addition Markdown (`.content.mardkwon`) and plain-text (`.content.text`) conversions of the original HTML content:
-
-```
-(reader) $ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source | ./reader.py - | jq .
+```json
 {
   "title": "Mercury Goes Open Source! — Postlight — Digital product studio",
   "author": "Adam Pash",
@@ -92,11 +66,8 @@ The Mercury Web Parser's raw JSON results are useful on their own:
 }
 ```
 
-### HTML
-The original extracted HTML content from the Mercury Web Parser is accessible from `.content.html`:
-
-```
-(reader) $ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source | ./reader.py - | jq -r .content.html
+### HTML output
+```html
 <div class="body__content"> <p>It&#x2019;s my pleasure to announce that today, Postlight is open-sourcing the <a href="https://mercury.postlight.com/web-parser/">Mercury Web Parser</a>.</p>
 <p>Written in JavaScript and running on both Node and in the browser, Mercury Parser is the engine that powers the Mercury Parser API, <a href="https://mercury.postlight.com/amp-converter/">Mercury AMP Converter</a>, <a href="https://mercury.postlight.com/reader/">Mercury Reader</a>, and <a href="https://postlight.com/trackchanges/the-secret-engines-of-the-internet">even more third-party software and services.</a></p>
 <p>Mercury Parser allows for better reading experiences, easier content migration, and endless opportunities for remixing the web, by making semantic sense out of any article. Mercury Parser sees web pages the same way you do: It sees titles, content, authors, and lead images, and makes all of that extracted data easily available to your software, which, unfortunately, sees only a sea of HTML markup, where page navigation, advertising, and the like are indistinguishable from content.</p>
@@ -115,12 +86,8 @@ The original extracted HTML content from the Mercury Web Parser is accessible fr
 <p><em><a href="https://postlight.com/trackchanges/authors/adam-pash">Adam Pash</a> is a Director of Engineering at Postlight. Want help making sense of big messy data? Get in touch: <a href="https://postlight.com/cdn-cgi/l/email-protection#4d25282121220d3d223e3921242a2539632e2220"><span class="__cf_email__">[email&#xA0;protected]</span></a>.</em></p> </div>
 ```
 
-### Markdown
-A Markdown conversion from the HTML is added in `.content.markdown` which can be extracted just like the HTML via `jq` in the previous example.  However, as a convenience `reader.py` can output the document as Markdown (as opposed to JSON) including some of the human-relevant metadata using the `-f/--format` option:
-
-```
-(reader) $ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source | ./reader.py - --format=md
-
+### Markdown output
+```markdown
 date: 2019-02-06 14:36:45  
 author(s): Adam Pash  
 
@@ -161,12 +128,8 @@ Today we've done exactly that. You can use Mercury Parser directly in any JavaSc
 _[Adam Pash](https://postlight.com/trackchanges/authors/adam-pash) is a Director of Engineering at Postlight. Want help making sense of big messy data? Get in touch: [ [email protected]](https://postlight.com/cdn-cgi/l/email-protection#86eee3eaeae9c6f6e9f5f2eaefe1eef2a8e5e9eb)._
 
 ```
-### Plain-text
-Similarly to the previous example, `reader.py` can also format the whole document, along with a subset of the metadata, as plain-text:
-
-```
-(reader) $ mercury-parser https://postlight.com/trackchanges/mercury-goes-open-source | ./reader.py - --format=txt
-
+### Plain-text output
+```text
 url: https://postlight.com/trackchanges/mercury-goes-open-source
 date: 2019-02-06 14:36:45
 author(s): Adam Pash
