@@ -1,9 +1,8 @@
-# reader
-Extract clean(er), readable text from web pages via [Mercury Web Parser](https://github.com/postlight/mercury-parser).
+# mercy-reader
+A python library to extract clean(er), readable text from web pages, inspired by [zyocum's reader](https://github.com/zyocum/reader).
 
-## A note on the Mercury Web Parser
-The creators of the Mercury Web Parser initially offered it as a free service via a ReSTful API, but have since open sourced it.  The API was shut down April 15, 2019.  To continue using the parser, install its command-line driver using [`yarn`](https://github.com/yarnpkg/yarn) or [`npm`](https://github.com/npm/cli) package managers:
-
+## Prerequisite
+Please install [mercury-parser](https://github.com/postlight/mercury-parser) beforehand.
 ```
 # Install Mercury globally
 yarn global add @postlight/mercury-parser
@@ -16,66 +15,28 @@ npm -g install @postlight/mercury-parser
 Clone this repository, create a virtual environment, and install the Python requirements:
 
 ```
-$ python3 -m venv .
-...
-$ source bin/activate
-(reader) $ pip install -r requirements.txt
-...
+pip install mercy-reader
 ```
 
 ## Usage
 
-```
-(reader) $ ./reader.py -h
-usage: reader.py [-h] [-f {json,md,txt}] [-w BODY_WIDTH] filename
+```python
+from mercy_reader import reader
+from os import path
 
-Get a cleaner version of a web page for reading purposes. This script reads
-JSON input from the Mercury Web Parser (https://github.com/postlight/mercury-
-parser) and performs conversion of HTML to markdown and plain-text via
-html2text.
-
-positional arguments:
-  filename              load Mercury Web Parser JSON result from file (use "-"
-                        to read from stdin)
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -f {json,md,txt}, --format {json,md,txt}
-                        output format (default: json)
-  -w BODY_WIDTH, --body-width BODY_WIDTH
-                        character offset at which to wrap lines for plain-text
-                        (default: None)
-```
-
-Alternatively, there is a `mercury.py` script that acts just like `reader.py`, except it wraps the `mercury-parser` command line on your behalf, so instead of loading the JSON from stdin or a file, it runs the Node.js javascript internally, so all it requires is a URL:
+test_data_path = path.join(path.dirname(__file__), "data.json")
+obj = reader.main(
+        reader.load(test_data_path),
+        80,
+    )
+print(reader.Format.formatter['md'](obj))
 
 ```
-(reader) $ ./mercury.py -h
-usage: mercury.py [-h] [-f {json,md,txt}] [-w BODY_WIDTH] [-p MERCURY_PATH]
-                  url
 
-Python wrapper of the Mercury Parser command line This requires you've
-installed Node.js (https://nodejs.org/en/) and the mercury-parser
-(https://github.com/postlight/mercury-parser): # Install Mercury globally $
-yarn global add @postlight/mercury-parser # or $ npm -g install
-@postlight/mercury-parser
-
-positional arguments:
-  url                   URL to parse
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -f {json,md,txt}, --format {json,md,txt}
-                        output format (default: json)
-  -w BODY_WIDTH, --body-width BODY_WIDTH
-                        character offset at which to wrap lines for plain-text
-                        (default: None)
-  -p MERCURY_PATH, --mercury-path MERCURY_PATH
-                        path to mercury-parser command line driver (default:
-                        /usr/local/bin/mercury-parser)
-```
-
-If you installed `mercury-parser` somewhere other than the default path, just supply the path with the `-p/--mercury-path` option.
+Supported format:
+* md
+* json
+* txt
 
 ## Examples
 
@@ -246,16 +207,6 @@ Today we've done exactly that. You can use Mercury Parser directly in any JavaSc
 
 Adam Pash is a Director of Engineering at Postlight. Want help making sense of big messy data? Get in touch: [email protected].
 
-```
-
-### Read Web Content in Your Terminal
-One use case for this script is to convert content from the web to a format that is suitable for reading in your terminal.  Here's a short shell pipeline to extract the content and feed the converted plain-text to your `$PAGER` of choice for easy reading:
-
-```
-#!/bin/bash
-url=$1
-reader=path/to/reader.py
-mercury-parser "$url" | "$reader" - -w 80 -f txt | "$PAGER"
 ```
 
 ### Run the test
